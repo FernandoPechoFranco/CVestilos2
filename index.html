@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV Builder</title>
+  <title>CV Studio</title>
+  <link rel="icon" href="./assets/ico/cv-logo.svg" type="image/svg+xml" sizes="any">
+  <link rel="shortcut icon" href="./assets/ico/cv-logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/ico/cv-logo.svg">
+  <meta name="theme-color" content="#111827">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +18,10 @@
     <div class="start-card">
       <div class="start-head">
         <div>
-          <p class="eyebrow dark">Nuevo CV</p>
+          <div class="brand brand-dark">
+            <span class="brand-mark" aria-hidden="true">CV</span>
+            <span>CV Studio</span>
+          </div>
           <h1>Elige una plantilla</h1>
           <p class="start-copy">Selecciona un estilo y luego modifica tu CV.</p>
         </div>
@@ -39,7 +46,10 @@
   <main class="app-shell">
     <section class="hero">
       <div>
-        <p class="eyebrow">Creador de CV</p>
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">CV</span>
+          <span>CV Studio</span>
+        </div>
         <h1>Nuevo CV</h1>
         <p class="hero-copy">Selecciona una plantilla, edita tu información y exporta tu CV.</p>
       </div>
@@ -100,8 +110,14 @@ Inglés: Avanzado</textarea>
               <input id="photo" type="file" accept="image/*">
             </label>
             <div class="photo-shape-controls" aria-label="Forma de foto">
-              <button class="shape-btn active" type="button" data-shape="circle" id="shapeCircle">Círculo</button>
-              <button class="shape-btn" type="button" data-shape="square" id="shapeSquare">Cuadrado</button>
+              <button class="shape-btn active" type="button" data-shape="circle" id="shapeCircle" aria-label="Foto circular" title="Foto circular">
+                <span class="shape-icon circle-icon" aria-hidden="true"></span>
+                <span class="sr-only">Círculo</span>
+              </button>
+              <button class="shape-btn" type="button" data-shape="square" id="shapeSquare" aria-label="Foto cuadrada" title="Foto cuadrada">
+                <span class="shape-icon square-icon" aria-hidden="true"></span>
+                <span class="sr-only">Cuadrado</span>
+              </button>
             </div>
           </div>
         </div>
