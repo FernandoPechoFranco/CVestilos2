@@ -31,7 +31,6 @@ const inputs = ['name', 'headline', 'email', 'phone', 'website', 'location', 'su
 const scrollToTop = document.getElementById('scrollToTemplates');
 const openExport = document.getElementById('openExport');
 const closeExport = document.getElementById('closeExport');
-const printCv = document.getElementById('printCv');
 const downloadPdf = document.getElementById('downloadPdf');
 
 const presetCount = 50;
@@ -169,9 +168,14 @@ photoInput.addEventListener('change', () => {
   reader.readAsDataURL(file);
 });
 
+function downloadCvPdf() {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  window.print();
+}
+
 openExport.addEventListener('click', () => {
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
+  downloadCvPdf();
 });
 
 closeExport.addEventListener('click', () => {
@@ -186,14 +190,8 @@ modal.addEventListener('click', event => {
   }
 });
 
-printCv.addEventListener('click', () => {
-  modal.classList.remove('open');
-  window.print();
-});
-
 downloadPdf.addEventListener('click', () => {
-  modal.classList.remove('open');
-  window.print();
+  downloadCvPdf();
 });
 
 scrollToTop.addEventListener('click', () => {
