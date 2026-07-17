@@ -1,1 +1,24 @@
-mejorando la pagina de inicio de mi proyecto
+# CVestilos
+
+Esta página es un creador de currículums vitae online, pensado para ayudar a las personas a diseñar un CV profesional de manera rápida, moderna y sencilla.
+
+## ¿Qué hace esta página?
+
+Su objetivo es facilitar la creación de un documento visualmente atractivo sin necesidad de usar programas complejos ni dedicar mucho tiempo al proceso.
+
+## Funciones principales
+
+- Elegir entre diferentes plantillas y estilos visuales.
+- Editar datos personales, experiencia laboral, formación académica, habilidades e idiomas.
+- Personalizar el diseño del CV con colores y formatos atractivos.
+- Ver la vista previa del documento en tiempo real mientras se modifican los datos.
+- Descargar el resultado en formato PDF para compartirlo, enviarlo por correo o imprimirlo.
+
+## ¿Por qué usarla?
+
+Esta herramienta está orientada a quienes desean presentar una imagen más profesional en búsquedas laborales, procesos de selección o networking.
+
+## Página publicada
+
+Puedes ver la propuesta funcionando aquí:
+https://fernandopechofranco.github.io/CVestilos2/
