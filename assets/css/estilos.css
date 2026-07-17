@@ -265,11 +265,113 @@ img { max-width: 100%; display: block; }
 .form-grid, .two-col { display: grid; gap: 12px; }
 .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 16px;
+}
+.experience-field {
+  display: grid;
+  gap: 12px;
+}
+.experience-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.experience-field-header span {
+  font-weight: 600;
+  font-size: 14px;
+}
+.language-control {
+  display: grid;
+  gap: 12px;
+}
+.language-list {
+  display: grid;
+  gap: 12px;
+}
+.language-item {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid rgba(16, 24, 40, .12);
+  border-radius: 16px;
+}
+.language-item label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  color: #1d2939;
+}
+.language-item input,
+.language-item select {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  background: #fff;
+}
+.language-item input:focus,
+.language-item select:focus {
+  outline: none;
+  border-color: rgba(47, 112, 175, .55);
+  box-shadow: var(--focus);
+}
+.btn-remove-language {
+  justify-self: flex-end;
+  color: #7c3aed;
+  font-size: 13px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-remove-language:hover {
+  text-decoration: underline;
+}
+.btn-small {
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: #101828;
+  background: #f5f5f5;
+  border: 1px solid rgba(16, 24, 40, .12);
+  align-self: start;
+  justify-self: start;
+}
+.btn-small:hover {
+  background: #e6e6e6;
+}
+.experience-field-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.btn-link {
+  background: none;
+  color: #7c3aed;
+  border: 0;
+  padding: 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+.btn-link:hover {
+  text-decoration: underline;
+}
 .photo-field {
   display: grid;
   grid-template-columns: 1fr;
   gap: 4px;
   align-items: start;
+}
+
+.hidden,
+[hidden] {
+  display: none !important;
 }
 .photo-shape-controls {
   display: flex;

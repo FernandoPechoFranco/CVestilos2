@@ -72,44 +72,79 @@
         </div>
 
         <div class="form-grid">
-          <label>Nombre completo<input id="name" type="text" value="Javiera Blanch"></label>
-          <label>Cargo<input id="headline" type="text" value="Product Manager productos digitales"></label>
-          <label>Email<input id="email" type="email" value="javierablanch@gmail.com"></label>
-          <label>Teléfono<input id="phone" type="text" value="+34 698 557 002"></label>
-          <label>Web<input id="website" type="text" value="javierablanch.cyu"></label>
-          <label>Ubicación<input id="location" type="text" value="Madrid, España"></label>
+          <label>Nombre completo<input id="name" type="text" value="" placeholder="Ej. Juan Pérez"></label>
+          <label>Cargo<input id="headline" type="text" value="" placeholder="Ej. Desarrollador web"></label>
+          <label>Email<input id="email" type="email" value="" placeholder="Ej. correo@ejemplo.com"></label>
+          <label>Teléfono<input id="phone" type="text" value="" placeholder="Ej. +34 600 123 456"></label>
+          <label>Web<input id="website" type="text" value="" placeholder="Ej. www.miportafolio.com"></label>
+          <label>Ubicación<input id="location" type="text" value="" placeholder="Ej. Madrid, España"></label>
         </div>
 
         <label>Perfil profesional
-          <textarea id="summary" rows="5">Responsable de estrategia digital con experiencia en producto, comunicación y analítica. Enfocada en resultados, coordinación de equipos y mejora continua.</textarea>
+          <textarea id="summary" rows="5" placeholder="Ej. Profesional con experiencia en desarrollo y diseño de aplicaciones web."></textarea>
         </label>
 
-        <div class="two-col">
-          <label>Experiencia 1
-            <textarea id="experience1" rows="5">Ecommerce Product Owner | 2019 - Presente
-Lideré la optimización de procesos digitales, analítica de negocio y coordinación entre equipos técnicos y comerciales.</textarea>
-          </label>
-          <label>Experiencia 2
-            <textarea id="experience2" rows="5">Tech Lead | 2016 - 2019
-Gestioné prioridades del producto, definí roadmap y trabajé con stakeholders para lanzar nuevas funcionalidades.</textarea>
-          </label>
+        <div class="experience-grid">
+          <div class="experience-field">
+            <div class="experience-field-header">
+              <span>Experiencia</span>
+              <button class="btn btn-secondary btn-small" id="addExperience" type="button">+ Agregar experiencia</button>
+            </div>
+            <textarea id="experience1" rows="5" placeholder="Ej. Lideré el desarrollo de una plataforma de ventas online."></textarea>
+          </div>
+          <div class="experience-field hidden" id="experience2Wrapper">
+            <div class="experience-field-header">
+              <button class="btn btn-link btn-remove" type="button" data-remove="experience2Wrapper">Eliminar</button>
+            </div>
+            <textarea id="experience2" rows="5" placeholder="Ej. Coordiné un equipo de diseño y mejoré procesos internos."></textarea>
+          </div>
+          <div class="experience-field hidden" id="experience3Wrapper">
+            <div class="experience-field-header">
+              <button class="btn btn-link btn-remove" type="button" data-remove="experience3Wrapper">Eliminar</button>
+            </div>
+            <textarea id="experience3" rows="5" placeholder="Ej. Implementé campañas digitales con resultados medibles."></textarea>
+          </div>
+          <div class="experience-field hidden" id="experience4Wrapper">
+            <div class="experience-field-header">
+              <button class="btn btn-link btn-remove" type="button" data-remove="experience4Wrapper">Eliminar</button>
+            </div>
+            <textarea id="experience4" rows="5" placeholder="Ej. Desarrollé soluciones efectivas para la atención al cliente."></textarea>
+          </div>
         </div>
 
         <div class="two-col">
           <label>Educación
-            <textarea id="education" rows="4">Master en Marketing Digital
-Universidad de Madrid | 2015 - 2016</textarea>
+            <textarea id="education" rows="4" placeholder="Ej. Licenciatura en Ingeniería Informática."></textarea>
           </label>
           <label>Habilidades
-            <textarea id="skills" rows="4">Product strategy, SEO, Google Analytics, Notion, Figma, liderazgo, comunicación, gestión de proyectos</textarea>
+            <textarea id="skills" rows="4" placeholder="Ej. JavaScript, CSS, React, Figma."></textarea>
           </label>
         </div>
 
         <div class="two-col">
-          <label>Idiomas
-            <textarea id="languages" rows="4">Español: Nativo
-Inglés: Avanzado</textarea>
-          </label>
+          <div class="language-control">
+            <div class="experience-field-header">
+              <span>Idiomas</span>
+              <button class="btn btn-secondary btn-small" id="addLanguage" type="button">+ Agregar idioma</button>
+            </div>
+            <div id="languageList" class="language-list">
+              <div class="language-item">
+                <label>
+                  <span>Idioma</span>
+                  <input type="text" class="language-name" placeholder="Ej. Español">
+                </label>
+                <label>
+                  <span>Nivel</span>
+                  <select class="language-level">
+                    <option value="">Selecciona</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Intermedio">Intermedio</option>
+                    <option value="Avanzado">Avanzado</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
           <div class="photo-field">
             <label>Foto
               <input id="photo" type="file" accept="image/*">
@@ -140,35 +175,37 @@ Inglés: Avanzado</textarea>
               <img id="previewPhoto" src="assets/image/profile-placeholder.svg" alt="Foto de perfil">
             </div>
             <div class="resume-nameblock">
-              <h3 id="previewName">Javiera Blanch</h3>
-              <p id="previewHeadline">Product Manager productos digitales</p>
+              <h3 id="previewName"></h3>
+              <p id="previewHeadline"></p>
             </div>
             <div class="resume-contact">
-              <p><span>Email</span><strong id="previewEmail">javierablanch@gmail.com</strong></p>
-              <p><span>Teléfono</span><strong id="previewPhone">+34 698 557 002</strong></p>
-              <p><span>Web</span><strong id="previewWebsite">javierablanch.cyu</strong></p>
-              <p><span>Ubicación</span><strong id="previewLocation">Madrid, España</strong></p>
+              <p><span>Email</span><strong id="previewEmail"></strong></p>
+              <p><span>Teléfono</span><strong id="previewPhone"></strong></p>
+              <p><span>Web</span><strong id="previewWebsite"></strong></p>
+              <p><span>Ubicación</span><strong id="previewLocation"></strong></p>
             </div>
-            <div class="resume-section">
+            <div class="resume-section skills">
               <h4>Habilidades</h4>
               <ul id="previewSkills"></ul>
             </div>
-            <div class="resume-section">
+            <div class="resume-section languages">
               <h4>Idiomas</h4>
               <ul id="previewLanguages"></ul>
             </div>
           </aside>
           <section class="resume-main">
-            <div class="resume-section">
+            <div class="resume-section summary">
               <h4>Perfil profesional</h4>
               <p id="previewSummary"></p>
             </div>
-            <div class="resume-section">
+            <div class="resume-section experience">
               <h4>Experiencia laboral</h4>
               <p id="previewExperience1"></p>
               <p id="previewExperience2"></p>
+              <p id="previewExperience3"></p>
+              <p id="previewExperience4"></p>
             </div>
-            <div class="resume-section">
+            <div class="resume-section education">
               <h4>Formación académica</h4>
               <p id="previewEducation"></p>
             </div>

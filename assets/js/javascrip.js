@@ -20,12 +20,14 @@ const bindings = {
   summary: document.getElementById('previewSummary'),
   experience1: document.getElementById('previewExperience1'),
   experience2: document.getElementById('previewExperience2'),
+  experience3: document.getElementById('previewExperience3'),
+  experience4: document.getElementById('previewExperience4'),
   education: document.getElementById('previewEducation'),
   skills: document.getElementById('previewSkills'),
   languages: document.getElementById('previewLanguages'),
 };
 
-const inputs = ['name', 'headline', 'email', 'phone', 'website', 'location', 'summary', 'experience1', 'experience2', 'education', 'skills', 'languages']
+const inputs = ['name', 'headline', 'email', 'phone', 'website', 'location', 'summary', 'experience1', 'experience2', 'experience3', 'experience4', 'education', 'skills']
   .reduce((acc, id) => ({ ...acc, [id]: document.getElementById(id) }), {});
 
 const scrollToTop = document.getElementById('scrollToTemplates');
@@ -59,6 +61,61 @@ function renderList(target, text) {
   });
 }
 
+function createLanguageItem() {
+  const item = document.createElement('div');
+  item.className = 'language-item';
+  item.innerHTML = `
+    <label>
+      <span>Idioma</span>
+      <input type="text" class="language-name" placeholder="Ej. Español">
+    </label>
+    <label>
+      <span>Nivel</span>
+      <select class="language-level">
+        <option value="">Selecciona</option>
+        <option value="Básico">Básico</option>
+        <option value="Intermedio">Intermedio</option>
+        <option value="Avanzado">Avanzado</option>
+      </select>
+    </label>
+    <button class="btn btn-link btn-remove-language" type="button">Eliminar</button>
+  `;
+  return item;
+}
+
+function getLanguageEntries() {
+  if (!languageList) return [];
+  return Array.from(languageList.querySelectorAll('.language-item')).map(item => {
+    const name = item.querySelector('.language-name')?.value.trim() || '';
+    const level = item.querySelector('.language-level')?.value || '';
+    if (!name) return null;
+    return level ? `${name} - ${level}` : name;
+  }).filter(Boolean);
+}
+
+function toggleSection(section, isVisible) {
+  if (!section) return;
+  section.hidden = !isVisible;
+}
+
+function hideEmptyPreviewSections() {
+  toggleSection(document.querySelector('.resume-section.summary'), Boolean(inputs.summary.value.trim()));
+  toggleSection(document.querySelector('.resume-section.experience'), Boolean(inputs.experience1.value.trim() || inputs.experience2.value.trim() || inputs.experience3.value.trim() || inputs.experience4.value.trim()));
+  toggleSection(document.querySelector('.resume-section.education'), Boolean(inputs.education.value.trim()));
+  toggleSection(document.querySelector('.resume-section.skills'), Boolean(inputs.skills.value.trim()));
+  toggleSection(document.querySelector('.resume-section.languages'), Boolean(getLanguageEntries().length));
+  toggleSection(document.querySelector('.resume-nameblock'), Boolean(inputs.name.value.trim() || inputs.headline.value.trim()));
+  toggleSection(document.querySelector('.resume-contact'), ['email', 'phone', 'website', 'location'].some(id => inputs[id].value.trim()));
+
+  ['email', 'phone', 'website', 'location'].forEach(id => {
+    const strong = bindings[id];
+    if (strong) {
+      const parent = strong.parentElement;
+      parent.hidden = !strong.textContent.trim();
+    }
+  });
+}
+
 function syncPreview() {
   bindings.name.textContent = inputs.name.value;
   bindings.headline.textContent = inputs.headline.value;
@@ -69,9 +126,12 @@ function syncPreview() {
   bindings.summary.textContent = inputs.summary.value;
   bindings.experience1.textContent = inputs.experience1.value;
   bindings.experience2.textContent = inputs.experience2.value;
+  bindings.experience3.textContent = inputs.experience3.value;
+  bindings.experience4.textContent = inputs.experience4.value;
   bindings.education.textContent = inputs.education.value;
   renderList(bindings.skills, inputs.skills.value);
-  renderList(bindings.languages, inputs.languages.value);
+  renderList(bindings.languages, getLanguageEntries().join('\n'));
+  hideEmptyPreviewSections();
 }
 
 function closeStartModal() {
@@ -208,6 +268,66 @@ chooseTemplate.addEventListener('click', () => {
 
 shapeCircle.addEventListener('click', () => setPhotoShape('circle'));
 shapeSquare.addEventListener('click', () => setPhotoShape('square'));
+
+const addExperience = document.getElementById('addExperience');
+const experienceWrappers = [
+  document.getElementById('experience2Wrapper'),
+  document.getElementById('experience3Wrapper'),
+  document.getElementById('experience4Wrapper'),
+].filter(Boolean);
+const updateAddButton = () => {
+  if (!addExperience) return;
+  addExperience.hidden = !experienceWrappers.some(wrapper => wrapper.classList.contains('hidden'));
+};
+if (addExperience && experienceWrappers.length) {
+  addExperience.addEventListener('click', () => {
+    const nextHidden = experienceWrappers.find(wrapper => wrapper.classList.contains('hidden'));
+    if (nextHidden) {
+      nextHidden.classList.remove('hidden');
+      const textarea = nextHidden.querySelector('textarea');
+      if (textarea) textarea.focus();
+    }
+    updateAddButton();
+  });
+}
+
+document.querySelectorAll('.btn-remove').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.dataset.remove;
+    const target = document.getElementById(targetId);
+    if (target) {
+      const textarea = target.querySelector('textarea');
+      if (textarea) textarea.value = '';
+      target.classList.add('hidden');
+      updateAddButton();
+      syncPreview();
+    }
+  });
+});
+
+const addLanguage = document.getElementById('addLanguage');
+const languageList = document.getElementById('languageList');
+if (addLanguage && languageList) {
+  addLanguage.addEventListener('click', () => {
+    const newItem = createLanguageItem();
+    languageList.appendChild(newItem);
+    newItem.querySelector('.language-name')?.focus();
+  });
+  languageList.addEventListener('input', event => {
+    if (event.target.matches('.language-name, .language-level')) {
+      syncPreview();
+    }
+  });
+  languageList.addEventListener('click', event => {
+    if (event.target.matches('.btn-remove-language')) {
+      const item = event.target.closest('.language-item');
+      if (item) {
+        item.remove();
+        syncPreview();
+      }
+    }
+  });
+}
 
 renderPills();
 buildGallery();
