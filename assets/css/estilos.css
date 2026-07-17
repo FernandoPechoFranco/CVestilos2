@@ -78,6 +78,28 @@ img { max-width: 100%; display: block; }
 }
 .btn-primary { background: #fff; color: #101828; }
 .btn-secondary { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.2); }
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  text-decoration: none;
+}
+.btn-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+.github-link {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.2);
+}
+.github-link:hover {
+  background: rgba(255,255,255,.2);
+}
 .btn:focus-visible, .shape-btn:focus-visible, .close-icon:focus-visible, .color-pill:focus-visible, .start-template:focus-visible {
   outline: none;
   box-shadow: var(--focus);
