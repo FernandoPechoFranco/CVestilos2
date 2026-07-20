@@ -6,6 +6,8 @@ const previewPhoto = document.getElementById('previewPhoto');
 const closeStart = document.getElementById('closeStart');
 const chooseTemplate = document.getElementById('chooseTemplate');
 const colorPills = document.getElementById('colorPills');
+const customColorButton = document.getElementById('customColorButton');
+const customColorPicker = document.getElementById('customColorPicker');
 const startGallery = document.getElementById('startGallery');
 const shapeCircle = document.getElementById('shapeCircle');
 const shapeSquare = document.getElementById('shapeSquare');
@@ -46,7 +48,7 @@ const openExport = document.getElementById('openExport');
 const closeExport = document.getElementById('closeExport');
 const downloadPdf = document.getElementById('downloadPdf');
 
-const presetCount = 50;
+const presetCount = 1;
 const layouts = ['a', 'b', 'c', 'd', 'e'];
 const accents = [
   { name: 'navy', accent: '#eab308', dark: '#243b53' },
@@ -174,6 +176,15 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+function darkenHex(hex, amount = 0.35) {
+  const normalized = hex.replace('#', '');
+  const num = parseInt(normalized, 16);
+  const r = clamp(Math.round(((num >> 16) & 255) * (1 - amount)), 0, 255);
+  const g = clamp(Math.round(((num >> 8) & 255) * (1 - amount)), 0, 255);
+  const b = clamp(Math.round((num & 255) * (1 - amount)), 0, 255);
+  return `#${[r, g, b].map(value => value.toString(16).padStart(2, '0')).join('')}`;
+}
+
 previewPhoto.addEventListener('pointerdown', event => {
   if (event.button !== 2) return;
   event.preventDefault();
@@ -265,6 +276,27 @@ function applyPreset(preset) {
   if (colorPills.children.length) {
     [...colorPills.children].forEach(btn => btn.classList.toggle('active', btn.dataset.color === preset.accent));
   }
+}
+
+if (customColorButton && customColorPicker) {
+  customColorButton.addEventListener('click', () => {
+    customColorPicker.click();
+  });
+
+  customColorPicker.addEventListener('input', event => {
+    const color = event.target.value;
+    const layout = selectedPreset?.layout || layouts[0];
+    const customPreset = {
+      id: 'preset-custom',
+      name: 'Color personalizado',
+      desc: `A4 ${layout.toUpperCase()} · personalizado`,
+      layout,
+      accent: 'custom',
+      accentColor: color,
+      darkColor: darkenHex(color, 0.35),
+    };
+    applyPreset(customPreset);
+  });
 }
 
 function buildGallery() {

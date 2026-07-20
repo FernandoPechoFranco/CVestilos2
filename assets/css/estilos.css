@@ -575,6 +575,12 @@ img { max-width: 100%; display: block; }
 }
 .color-pill.active { border-color: #94a3b8; box-shadow: 0 0 0 3px rgba(148, 163, 184, .2); }
 .color-pill[data-color="classic"] { background: #c18b2a; }
+.color-picker-input {
+  display: none;
+}
+#customColorButton {
+  min-width: 170px;
+}
 .color-pill[data-color="sidebar"] { background: #0c5a8d; }
 .color-pill[data-color="modern"] { background: #1f2733; }
 .color-pill[data-color="executive"] { background: #261f33; }
